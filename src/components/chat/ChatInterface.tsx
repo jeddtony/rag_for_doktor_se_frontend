@@ -126,10 +126,16 @@ export function ChatInterface() {
             role={message.role}
             content={message.content}
             websiteUrls={message.websiteUrls}
+            enableTyping={message.role === 'assistant' && message.id !== 'welcome'}
           />
         ))}
         {isLoading && (
-          <ChatMessage role="assistant" content="" isLoading />
+          <ChatMessage 
+            role="assistant" 
+            content="" 
+            isLoading 
+            loadingMessages={t.loadingMessages}
+          />
         )}
         
         {/* Suggested questions - show only when no user messages yet */}

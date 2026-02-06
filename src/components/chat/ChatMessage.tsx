@@ -1,15 +1,31 @@
 import { cn } from '@/lib/utils';
 import { User, Bot, ExternalLink } from 'lucide-react';
+import { useRotatingMessage } from '@/hooks/use-rotating-message';
+import { useTypewriter } from '@/hooks/use-typewriter';
 
 interface ChatMessageProps {
-  role: 'user' | 'assistant';
-  content: string;
-  isLoading?: boolean;
-  websiteUrls?: string[];
+  readonly role: 'user' | 'assistant';
+  readonly content: string;
+  readonly isLoading?: boolean;
+  readonly websiteUrls?: string[];
+  readonly loadingMessages?: string[];
+  readonly enableTyping?: boolean;
 }
 
-export function ChatMessage({ role, content, isLoading, websiteUrls }: ChatMessageProps) {
+export function ChatMessage({ role, content, isLoading, websiteUrls, loadingMessages = [], enableTyping = false }: ChatMessageProps) {
   const isUser = role === 'user';
+  const rotatingMessage = useRotatingMessage(loadingMessages, 2000, isLoading);
+  
+  // Use typewriter effect for assistant messages when enabled
+  const shouldType = !isUser && !isLoading && enableTyping && content.length > 0;
+  const { displayedText, isTyping } = useTypewriter({
+    text: content,
+    speed: 20,
+    autoStart: shouldType,
+  });
+  
+  // Use typed text when typing is enabled, otherwise use full content
+  const displayContent = shouldType ? displayedText : content;
 
   return (
     <div
@@ -35,21 +51,33 @@ export function ChatMessage({ role, content, isLoading, websiteUrls }: ChatMessa
         )}
       >
         {isLoading ? (
-          <div className="flex gap-1.5 py-1">
-            <span className="w-2 h-2 rounded-full bg-current animate-bounce [animation-delay:-0.3s] opacity-60" />
-            <span className="w-2 h-2 rounded-full bg-current animate-bounce [animation-delay:-0.15s] opacity-60" />
-            <span className="w-2 h-2 rounded-full bg-current animate-bounce opacity-60" />
+          <div className="flex items-center gap-2 py-1">
+            <div className="flex gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-current animate-bounce [animation-delay:-0.3s] opacity-60" />
+              <span className="w-2 h-2 rounded-full bg-current animate-bounce [animation-delay:-0.15s] opacity-60" />
+              <span className="w-2 h-2 rounded-full bg-current animate-bounce opacity-60" />
+            </div>
+            {rotatingMessage && (
+              <span className="text-sm text-muted-foreground animate-in fade-in duration-300">
+                {rotatingMessage}
+              </span>
+            )}
           </div>
         ) : (
           <div className="space-y-3">
-            <p className="text-sm leading-relaxed whitespace-pre-wrap">{content}</p>
-            {websiteUrls && websiteUrls.length > 0 && (
+            <p className="text-sm leading-relaxed whitespace-pre-wrap">
+              {displayContent}
+              {shouldType && isTyping && (
+                <span className="inline-block w-2 h-4 ml-1 bg-current animate-pulse" />
+              )}
+            </p>
+            {websiteUrls && websiteUrls.length > 0 && !isTyping && (
               <div className="pt-2 border-t border-border/50 space-y-2">
                 <p className="text-xs text-muted-foreground font-medium">Related articles:</p>
                 <div className="flex flex-col gap-1.5">
-                  {websiteUrls.map((url, index) => (
+                  {websiteUrls.map((url) => (
                     <a
-                      key={index}
+                      key={url}
                       href={url}
                       target="_blank"
                       rel="noopener noreferrer"

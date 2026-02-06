@@ -11,6 +11,7 @@ interface Translations {
   inputPlaceholder: string;
   errorNoAnswer: string;
   errorSomethingWentWrong: string;
+  loadingMessages: string[];
 }
 
 const translations: Record<Language, Translations> = {
@@ -27,6 +28,16 @@ const translations: Record<Language, Translations> = {
     inputPlaceholder: 'Ask a question about your health...',
     errorNoAnswer: "I couldn't find an answer to your question.",
     errorSomethingWentWrong: 'Something went wrong. Please try again in a moment.',
+    loadingMessages: [
+      'Thinking for a better response...',
+      'Searching through health articles...',
+      'Analyzing your question...',
+      'Gathering relevant information...',
+      'Processing your request...',
+      'Finding the best answer...',
+      'Consulting medical resources...',
+      'Preparing a thoughtful response...',
+    ],
   },
   sv: {
     welcomeMessage: 'Hej! 👋 Välkommen till Doktor.se. Jag är din hälsoassistent och kan hjälpa dig att få svar på dina frågor om symtom, sjukdomar eller allmän hälsa. Informationen jag ger kommer från artiklar som publiceras på Doktor.se webbplats.',
@@ -41,6 +52,16 @@ const translations: Record<Language, Translations> = {
     inputPlaceholder: 'Ställ en fråga om din hälsa...',
     errorNoAnswer: 'Jag kunde inte hitta ett svar på din fråga.',
     errorSomethingWentWrong: 'Något gick fel. Försök igen om en stund.',
+    loadingMessages: [
+      'Tänker på ett bättre svar...',
+      'Söker igenom hälsoartiklar...',
+      'Analyserar din fråga...',
+      'Samlar relevant information...',
+      'Bearbetar din förfrågan...',
+      'Hittar det bästa svaret...',
+      'Konsulterar medicinska resurser...',
+      'Förbereder ett genomtänkt svar...',
+    ],
   },
 };
 
