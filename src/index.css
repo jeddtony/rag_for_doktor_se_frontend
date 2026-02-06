@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Kry-inspired medical teal palette */
+    --background: 180 20% 98%;
+    --foreground: 200 25% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 25% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 25% 15%;
+
+    /* Primary: Medical teal */
+    --primary: 174 58% 39%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 15% 95%;
+    --secondary-foreground: 200 25% 15%;
+
+    --muted: 180 12% 94%;
+    --muted-foreground: 200 15% 45%;
+
+    --accent: 174 40% 92%;
+    --accent-foreground: 174 58% 30%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 15% 88%;
+    --input: 180 15% 90%;
+    --ring: 174 58% 39%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 180 15% 97%;
+    --sidebar-foreground: 200 15% 30%;
+    --sidebar-primary: 174 58% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 174 30% 94%;
+    --sidebar-accent-foreground: 174 58% 30%;
+    --sidebar-border: 180 15% 88%;
+    --sidebar-ring: 174 58% 39%;
+  }
+
+  .dark {
+    --background: 200 25% 8%;
+    --foreground: 180 15% 95%;
+
+    --card: 200 20% 12%;
+    --card-foreground: 180 15% 95%;
+
+    --popover: 200 20% 12%;
+    --popover-foreground: 180 15% 95%;
+
+    --primary: 174 55% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 200 20% 18%;
+    --secondary-foreground: 180 15% 95%;
+
+    --muted: 200 20% 18%;
+    --muted-foreground: 180 10% 60%;
+
+    --accent: 174 30% 20%;
+    --accent-foreground: 174 55% 75%;
+
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 200 20% 20%;
+    --input: 200 20% 20%;
+    --ring: 174 55% 45%;
+
+    --sidebar-background: 200 20% 10%;
+    --sidebar-foreground: 180 15% 90%;
+    --sidebar-primary: 174 55% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 174 25% 18%;
+    --sidebar-accent-foreground: 174 55% 75%;
+    --sidebar-border: 200 20% 18%;
+    --sidebar-ring: 174 55% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
